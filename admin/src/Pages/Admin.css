@@ -1,0 +1,16 @@
+.admin {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;            
+  padding: 30px;
+  background-color: #f0f0f0;
+}
+
+@media(max-width: 800px){
+    .admin{
+        flex-direction: column;
+    }
+}

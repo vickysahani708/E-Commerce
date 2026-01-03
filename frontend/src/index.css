@@ -1,0 +1,22 @@
+/* index.css */
+
+/* Global Reset */
+* {
+  margin: 0;
+}
+
+/* Apply Poppins globally */
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #222; /* Normal text color */
+  background-color: #fff;
+}
+
+/* Optional link style override */
+a {
+  color: inherit; /* removes default blue color */
+  text-decoration: none;
+}
+
+
