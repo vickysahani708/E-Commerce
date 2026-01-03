@@ -19,11 +19,11 @@ This is a **full-stack E-Commerce application** built using the MERN stack (Mong
 ---
 
 ## Technologies
-- **Frontend**: React, Redux, Axios, React Router, Material-UI / TailwindCSS (if used)  
+- **Frontend**: React, Redux, Axios, React Router 
 - **Backend**: Node.js, Express.js  
 - **Database**: MongoDB (Mongoose)  
 - **Authentication**: JWT (JSON Web Tokens)  
-- **Other**: Nodemailer for emails, Cloudinary for image storage (if used)
+- **Other**: 
 
 ---
 
@@ -82,6 +82,7 @@ You can add screenshots of the **Admin Dashboard**, **Client App**, or **API Pos
 If you want, I can also **write a shorter “GitHub-friendly” version** with badges, live demo links, and instructions so your repo looks polished and ready for recruiters.  
 
 Do you want me to do that?
+
 
 
 
