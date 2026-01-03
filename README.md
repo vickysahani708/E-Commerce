@@ -74,14 +74,8 @@ npm install
 ```
 ---
 
-✅ **Tip:**  
-You can add screenshots of the **Admin Dashboard**, **Client App**, or **API Postman tests** under a `docs/screenshots` folder to make your README more professional.  
 
----
 
-If you want, I can also **write a shorter “GitHub-friendly” version** with badges, live demo links, and instructions so your repo looks polished and ready for recruiters.  
-
-Do you want me to do that?
 
 
 
