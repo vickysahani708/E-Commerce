@@ -199,6 +199,16 @@ app.post("/getcart", fetchUser, async (req, res) => {
   const userData = await User.findById(req.user.id);
   res.json(userData.cartData);
 });
+app.post("/removeproduct", async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Products.findOneAndDelete({ id });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false });
+  }
+});
+
 
 
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
