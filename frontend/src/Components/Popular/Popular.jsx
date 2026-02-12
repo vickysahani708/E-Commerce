@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 function Popular() {
   const[popularProducts,setPopularProducts] = useState([])
   useEffect(() =>{
-    fetch('http://localhost:4000/popularinwomen').then((response) => response.json()).then((data) => setPopularProducts(data))
+    fetch(`${import.meta.env.VITE_API_URL}/popularinwomen`).then((response) => response.json()).then((data) => setPopularProducts(data))
   },[])
   return (
     <div className='popular'>

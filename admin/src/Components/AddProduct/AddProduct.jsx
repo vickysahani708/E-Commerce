@@ -37,7 +37,7 @@ export default function AddProduct() {
       const formData = new FormData();
       formData.append('product', image);
 
-      const uploadRes = await fetch('http://localhost:4000/upload', {
+      const uploadRes = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -58,7 +58,7 @@ export default function AddProduct() {
       };
 
       // 3️⃣ Send product to backend
-      const res = await fetch('http://localhost:4000/addproducts', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/addproducts`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedProduct),

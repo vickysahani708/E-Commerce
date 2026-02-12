@@ -19,7 +19,7 @@ function Login() {
 
     let responseData;
 
-    await fetch('http://localhost:4000/login', {
+    await fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: formData.email, password: formData.password }),
@@ -40,7 +40,7 @@ function Login() {
 
     let responseData;
 
-    await fetch("http://localhost:4000/signup", {
+    await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

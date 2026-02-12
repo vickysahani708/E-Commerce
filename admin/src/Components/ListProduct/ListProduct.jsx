@@ -4,7 +4,7 @@ import cross_icon from '../../assets/Admin_Assets/cross_icon.png'
 function ListProduct() {
   const [allproducts, setproducts] = useState([])
   const fetchInfo = async () => {
-    const res = await fetch('http://localhost:4000/allproduct')
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/allproduct`)
     const data = await res.json()
     setproducts(data)
   }
@@ -14,7 +14,7 @@ function ListProduct() {
   }, [])
 
   const remove_product = async (id) => {
-    await fetch('http://localhost:4000/removeproduct', {
+    await fetch(`${import.meta.env.VITE_API_URL}/removeproduct`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
