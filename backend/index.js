@@ -6,7 +6,7 @@ const multer = require("multer");
 const path = require("path");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-
+const { GoogleGenAI } = require("@google/genai");
 const app = express();
 
 
@@ -208,6 +208,35 @@ app.post("/removeproduct", async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
+const geminiClient = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  apiVersion: "v1alpha",
+});
+app.post("/api/ai/chat", async (req, res) => {
+  try {
+    console.log("Incoming request body:", req.body);
+    const { message } = req.body;
+
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: "Message required" });
+    }
+
+    const response = await geminiClient.models.generateContent({
+      model: "models/gemini-2.5-flash",
+      contents: [{ role: "user", text: message }],
+    });
+
+    console.log("Gemini API full response:", JSON.stringify(response, null, 2));
+
+    const reply = response.candidates?.[0]?.content?.parts?.[0]?.text || "No reply";
+
+    res.json({ reply });
+  } catch (err) {
+    console.error("Gemini API error:", err);
+    res.status(500).json({ error: err.message || "AI error" });
+  }
+});
+
 
 
 
