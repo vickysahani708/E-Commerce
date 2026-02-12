@@ -1,5 +1,5 @@
 import React from 'react'
-import './popular.css'
+import './Popular.css'
 import data_product from '../assets/Frontend_Assets/data'
 import Item from '../items/item'
 import { useState } from 'react'
