@@ -1,11 +1,8 @@
-import React from 'react'
 import './NewCollections.css'
-import new_collections from '../assets/Frontend_Assets/new_collections'
 import Item from '../items/item'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 function NewCollections() {
-  const [new_collection,setNew_collection] = useState([])
+  const [new_collections,setNew_collection] = useState([])
   useEffect(() =>{
      fetch(`${import.meta.env.VITE_API_URL}/newcollections`).then((response) =>response.json()).then((data) => setNew_collection(data))
   },[])

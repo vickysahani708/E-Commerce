@@ -1,6 +1,5 @@
 import React from 'react'
 import './Popular.css'
-import data_product from '../assets/Frontend_Assets/data'
 import Item from '../items/item'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -14,7 +13,7 @@ function Popular() {
         <h1>POPULAR IN WOMEN</h1>
         <hr/>
         <div className="popular-item">
-            {data_product.map((item,i)=>{
+            {popularProducts.map((item,i)=>{
                 return <Item key={i} id={item.id} image={item.image} name={item.name} new_price={item.new_price} old_price={item.old_price}/>
              })}
         </div>

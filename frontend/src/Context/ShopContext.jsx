@@ -31,7 +31,7 @@ const ShopContextProvider = (props) => {
       if (!token) return;
 
       try {
-        const res = await fetch('http://localhost:4000/getcart', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/getcart`, {
           method: 'POST',
           headers: { 'auth-token': token }
         });
@@ -54,7 +54,7 @@ const ShopContextProvider = (props) => {
     if (!token) return;
 
     try {
-      const res = await fetch('http://localhost:4000/addcart', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/addcart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const ShopContextProvider = (props) => {
     if (!token) return;
 
     try {
-      const res = await fetch('http://localhost:4000/removeFromcart', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/removeFromcart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
