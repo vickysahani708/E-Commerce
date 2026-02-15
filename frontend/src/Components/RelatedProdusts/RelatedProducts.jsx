@@ -15,7 +15,7 @@ function RelatedProducts() {
       <h1>Related Product</h1>
       <hr/>
       <div className="relatedproducts-item">
-        {products.map((item,i)=>{
+        {products.slice(0, 4).map((item,i)=>{
           return <Item key={i} id={item.id} image={item.image} 
           name={item.name} new_price={item.new_price} 
           old_price={item.old_price}/>
