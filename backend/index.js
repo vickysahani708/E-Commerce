@@ -47,14 +47,6 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-app.post("/upload", upload.single("product"), (req, res) => {
-  res.json({
-    success: 1,
-    image_url: req.file.path,
-  });
-});
-
-
 const Products = mongoose.model("Products", {
   id: Number,
   name: String,
@@ -79,6 +71,7 @@ const User = mongoose.model("User", {
 app.use("/api/payments", require("./routes/payment"));
 app.use("/api/orders", require("./routes/orders"));
 app.use("/api/reviews", require("./routes/reviews"));
+app.use("/api/admin", require("./routes/admin"));
 
 const fetchUser = (req, res, next) => {
   const token = req.header("auth-token");
@@ -93,8 +86,27 @@ const fetchUser = (req, res, next) => {
   }
 };
 
+const requireAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select("email").lean();
+    const admins = (process.env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+    if (!user || !admins.includes(String(user.email).toLowerCase())) {
+      return res.status(403).json({ success: false, message: "Admin access required" });
+    }
+    next();
+  } catch (error) {
+    console.error("Admin authorization error:", error);
+    res.status(500).json({ success: false, message: "Could not authorize admin" });
+  }
+};
 
-app.post("/addproducts", async (req, res) => {
+app.post("/upload", fetchUser, requireAdmin, upload.single("product"), (req, res) => {
+  if (!req.file) return res.status(400).json({ success: false, message: "Product image is required" });
+  res.json({ success: 1, image_url: req.file.path });
+});
+
+
+app.post("/addproducts", fetchUser, requireAdmin, async (req, res) => {
   let products = await Products.find({});
   let id = products.length ? products[products.length - 1].id + 1 : 1;
 
@@ -214,7 +226,7 @@ app.post("/getcart", fetchUser, async (req, res) => {
   const userData = await User.findById(req.user.id);
   res.json(userData.cartData);
 });
-app.post("/removeproduct", async (req, res) => {
+app.post("/removeproduct", fetchUser, requireAdmin, async (req, res) => {
   try {
     const { id } = req.body;
     await Products.findOneAndDelete({ id });
