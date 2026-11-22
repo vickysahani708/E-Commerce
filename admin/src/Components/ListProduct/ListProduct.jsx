@@ -14,18 +14,16 @@ function ListProduct({ token, onUnauthorized }) {
   }, [])
 
   const remove_product = async (id) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/removeproduct`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'auth-token': token,
-      },
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/removeproduct`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": token },
       body: JSON.stringify({ id }),
-    })
+    });
+    if (response.status === 401 || response.status === 403) return onUnauthorized?.();
+    if (!response.ok) return alert("Could not remove product. Please try again.");
+    await fetchInfo();
+  };
 
-    await fetchInfo()
-  }
   return (
     <div className='list-product'>
       <h1>All Products List</h1>
