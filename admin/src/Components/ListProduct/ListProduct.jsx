@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ListProduct.css'
 import cross_icon from '../../assets/Admin_Assets/cross_icon.png'
-function ListProduct() {
+function ListProduct({ token, onUnauthorized }) {
   const [allproducts, setproducts] = useState([])
   const fetchInfo = async () => {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/allproduct`)
@@ -19,6 +19,7 @@ function ListProduct() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'auth-token': token,
       },
       body: JSON.stringify({ id }),
     })
