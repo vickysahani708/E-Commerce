@@ -1,0 +1,78 @@
+.orders-page {
+  width: min(1100px, 90%);
+  margin: 55px auto 80px;
+  min-height: 50vh;
+  color: #171717;
+}
+.orders-page > h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+.orders-subtitle {
+  margin: 0 0 30px;
+  color: #777;
+}
+.orders-empty {
+  padding: 55px 20px;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+.orders-empty h2 { margin: 0 0 8px; }
+.orders-empty p { color: #777; margin: 0; }
+.orders-list { display: grid; gap: 22px; }
+.order-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 22px;
+  background: #fff;
+}
+.order-card-header, .order-card-footer, .order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.order-card-header {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eee;
+}
+.order-card-header h2 { margin: 0 0 6px; font-size: 18px; }
+.order-card-header p { margin: 0; color: #777; font-size: 13px; }
+.order-statuses { display: flex; flex-wrap: wrap; gap: 8px; }
+.order-pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f2f2f2;
+  color: #444;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.order-confirmed, .payment-paid { background: #e7f6ec; color: #18743a; }
+.order-cancelled, .payment-failed { background: #fdecec; color: #b42318; }
+.order-items { padding: 8px 0; }
+.order-item { padding: 12px 0; border-bottom: 1px solid #f1f1f1; }
+.order-item img {
+  width: 58px;
+  height: 68px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #fafafa;
+}
+.order-item-info { flex: 1; }
+.order-item-info h3 { margin: 0 0 5px; font-size: 15px; }
+.order-item-info p { margin: 0; color: #777; font-size: 13px; }
+.order-item > strong { font-size: 14px; white-space: nowrap; }
+.order-card-footer { padding-top: 16px; font-size: 15px; }
+.order-card-footer strong { font-size: 18px; }
+.orders-message { padding: 14px; border-radius: 8px; }
+.orders-error { background: #fff0f0; color: #b42318; }
+@media (max-width: 600px) {
+  .orders-page { margin-top: 30px; }
+  .order-card { padding: 15px; }
+  .order-card-header { align-items: flex-start; flex-direction: column; }
+  .order-item img { width: 48px; height: 58px; }
+  .order-item-info h3 { font-size: 13px; }
+  .order-item > strong { font-size: 12px; }
+}
