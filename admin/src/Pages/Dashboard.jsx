@@ -3,7 +3,7 @@ import "./Dashboard.css";
 
 const money = (paise) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format((paise || 0) / 100);
 
-export default function Dashboard({ token }) {
+export default function Dashboard({ token, onUnauthorized }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -25,14 +25,14 @@ export default function Dashboard({ token }) {
     })
       .then(async (response) => {
         const result = await response.json();
-        if (!response.ok) throw new Error(result.message || "Unable to load analytics");
+        if (response.status === 401 || response.status === 403) { onUnauthorized?.(); throw new Error("Admin session expired or access revoked"); }\n        if (!response.ok) throw new Error(result.message || "Unable to load analytics");
         return result;
       })
       .then((result) => { if (active) setData(result); })
       .catch((err) => { if (active) setError(err.message); })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [token, range]);
+  }, [token, range, onUnauthorized]);
 
   const maxRevenue = Math.max(1, ...(data?.dailySales || []).map((item) => item.revenuePaise));
   const maxStatus = Math.max(1, ...(data?.statusBreakdown || []).map((item) => item.count));
