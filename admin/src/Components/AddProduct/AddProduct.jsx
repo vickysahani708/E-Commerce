@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './AddProduct.css';
 import upload_area from '../../assets/Admin_Assets/upload_area.svg';
 
-export default function AddProduct() {
+export default function AddProduct({ token }) {
   const [image, setImage] = useState(false);
   const [productDetails, setProductDetails] = useState({
     name: '',
@@ -39,6 +39,7 @@ export default function AddProduct() {
 
       const uploadRes = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: 'POST',
+        headers: { "auth-token": token },
         body: formData,
       });
 
@@ -60,11 +61,12 @@ export default function AddProduct() {
       // 3️⃣ Send product to backend
       const res = await fetch(`${import.meta.env.VITE_API_URL}/addproducts`, {
         method: 'POST',
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "auth-token": token },
         body: JSON.stringify(updatedProduct),
       });
 
       const result = await res.json();
+      if (!res.ok) throw new Error(result.message || "Could not add product");
 
 
 
@@ -80,7 +82,7 @@ export default function AddProduct() {
 
     } catch (err) {
       console.error(err);
-      alert("Something went wrong!");
+      alert(err.message || "Something went wrong!");
     }
   };
 
