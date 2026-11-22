@@ -35,7 +35,7 @@ function CartItem() {
         setPaymentMessage("");
 
         try {
-            const orderResponse = await fetch(`₹{import.meta.env.VITE_API_URL}/api/payments/create-order`, {
+            const orderResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/payments/create-order`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "auth-token": token },
             });
@@ -56,7 +56,7 @@ function CartItem() {
                 order_id: orderData.razorpayOrderId,
                 handler: async (paymentResponse) => {
                     try {
-                        const verifyResponse = await fetch(`₹{import.meta.env.VITE_API_URL}/api/payments/verify-payment`, {
+                        const verifyResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/payments/verify-payment`, {
                             method: "POST",
                             headers: { "Content-Type": "application/json", "auth-token": token },
                             body: JSON.stringify(paymentResponse),
