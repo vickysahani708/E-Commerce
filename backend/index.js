@@ -75,6 +75,9 @@ const User = mongoose.model("User", {
 });
 
 
+// Payment routes are mounted after the User and Products models are registered.
+app.use("/api/payments", require("./routes/payment"));
+
 const fetchUser = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) return res.status(401).send({ errors: "Access Denied" });
