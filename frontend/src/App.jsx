@@ -11,7 +11,8 @@ import Footer from './Components/Footer/Footer'
 import men_banner from './Components/assets/Frontend_Assets/banner_mens.png'
 import women_banner from './Components/assets/Frontend_Assets/banner_women.png'
 import kids_banner from './Components/assets/Frontend_Assets/banner_kids.png'
-import AiChat from './Components/AiChat/AiChat'; 
+import AiChat from './Components/AiChat/AiChat';
+import Orders from './Pages/Orders'; 
 function App() {
 
 
@@ -27,6 +28,7 @@ function App() {
 <Route path="/product/:productId" element={<Product />} />
 
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/orders' element={<Orders/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
       <Footer />
