@@ -42,6 +42,7 @@ function Navbar() {
                     </Link>
                 )}
 
+                {localStorage.getItem("auth-token") && <Link to="/orders" className="nav-orders-link">My Orders</Link>}
                 <Link to="/cart">
                     <img src={cart_icon} alt="cart" />
                 </Link>
