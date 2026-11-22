@@ -92,6 +92,9 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // Clear local cart after the backend confirms a successful payment.
+  const clearCart = () => setCartItems(getDefaultCart());
+
   // Calculate total cart amount
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -119,7 +122,8 @@ const ShopContextProvider = (props) => {
     addToCart,
     removeCart,
     getTotalCartAmount,
-    getTotalCartItems
+    getTotalCartItems,
+    clearCart
   };
 
   return (
