@@ -3,15 +3,15 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 const router = express.Router();
-const Review = mongoose.models.Review || mongoose.model("Review", new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
   productId: { type: Number, required: true, index: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   userName: { type: String, required: true, trim: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
   comment: { type: String, required: true, trim: true, maxlength: 1000 },
-}, { timestamps: true }));
-
-Review.schema.index({ productId: 1, user: 1 }, { unique: true });
+}, { timestamps: true });
+reviewSchema.index({ productId: 1, user: 1 }, { unique: true });
+const Review = mongoose.models.Review || mongoose.model("Review", reviewSchema);
 
 const requireUser = (req, res, next) => {
   const token = req.header("auth-token");
